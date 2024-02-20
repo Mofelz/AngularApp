@@ -1,4 +1,5 @@
 <h2>Таблица компаний</h2>
+<p *ngIf="!company" class="text-center text-lg">Loading...</p>
 <table *ngIf="company">
   <thead>
   <tr>
@@ -11,12 +12,12 @@
   </tr>
   </thead>
   <tbody>
-  <tr>
+  <tr *ngFor="let  companies of company">
     <td>
-      <h1>{{company.nameCompany}}</h1>
+      <h1>{{companies.nameCompany}}</h1>
     </td>
     <td>
-      <h1>{{company.addresCompany}}</h1>
+      <h1>{{companies.addresCompany}}</h1>
     </td>
   </tr>
   </tbody>

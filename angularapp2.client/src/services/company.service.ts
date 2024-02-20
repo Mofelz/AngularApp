@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {delay, Observable} from "rxjs";
 import {Company} from "../models/models";
 
 @Injectable({
@@ -11,6 +11,7 @@ export class CompanyService {
     private http:HttpClient,
   ) {}
   getAllCompany():Observable<Company[]>{
-    return this.http.get<any>('https://localhost:7014/api/company/getall')
+    return this.http.get<any>('https://localhost:7014/api/company/getall').pipe(
+      delay(2000))
   }
 }

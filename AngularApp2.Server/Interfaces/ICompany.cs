@@ -6,5 +6,8 @@ namespace AngularApp2.Server.Interfaces
     {
         IEnumerable<Company> GetAll();
         bool Add(Company company);
+        bool Update(Company company);
+        bool Delete(int id);
+        Company GetById(int id);
     }
 }

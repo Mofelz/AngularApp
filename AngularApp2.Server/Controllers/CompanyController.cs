@@ -21,11 +21,29 @@ namespace AngularApp2.Server.Controllers
             return _company.GetAll();
         }
         [HttpGet]
+        [Route("api/company/getbyid/{id}")]
+        public Company GetByIdCompany([FromRoute]int id)
+        {
+            return _company.GetById(id);
+        }
+        [HttpPost]
         [Route("api/company/add")]
         public bool AddCompany(Company company)
         {
-
             return _company.Add(company);
         }
+        [HttpPut]
+        [Route("api/company/update")]
+        public bool UpdateCompany(Company company) 
+        {
+            return _company.Update(company);
+        }
+        [HttpDelete]
+        [Route("api/company/delete")]
+        public bool DeleteCompany(int id)
+        {
+            return _company.Delete(id);
+        }
+
     }
 }
