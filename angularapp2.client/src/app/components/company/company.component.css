@@ -15,3 +15,8 @@ table td {
   border: 1px solid #dddddd;
   padding: 5px;
 }
+input{
+  margin: 1em;
+  width: 150px;
+  height: 30px;
+}

@@ -6,7 +6,7 @@ export interface Fio{
   number: number;
 }
 export interface Company{
-  id: number;
+  id?: number;
   nameCompany: string;
   addresCompany: string;
 }

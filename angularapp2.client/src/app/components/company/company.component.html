@@ -1,6 +1,29 @@
+
+<p *ngIf="!companies" class="text-center text-lg">Loading...</p>
+
+<div>
+  <div>
+    <label>Номер</label>
+    <input [(ngModel)]="company.id" type="number" maxlength="50">
+  </div>
+  <div>
+    <label>Наименование</label>
+    <input [(ngModel)]="company.nameCompany" type="text" maxlength="50">
+  </div>
+  <div>
+    <label>Адрес</label>
+    <input [(ngModel)]="company.addresCompany" type="text" maxlength="50">
+  </div>
+  <button (click)="addCompany()">Добавить</button>
+  <button (click)="updateCompany()">Обновить</button>
+  <button (click)="deleteCompany()">Удалить</button>
+  <button (click)="searchCompany()">Поиск по id</button>
+
+</div>
+
 <h2>Таблица компаний</h2>
-<p *ngIf="!company" class="text-center text-lg">Loading...</p>
-<table *ngIf="company">
+
+<table *ngIf="companies">
   <thead>
   <tr>
     <th>
@@ -12,16 +35,20 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let  companies of company">
+  <tr *ngFor="let  company of companies">
     <td>
-      <h1>{{companies.nameCompany}}</h1>
+      <h1>{{company.nameCompany}}</h1>
     </td>
     <td>
-      <h1>{{companies.addresCompany}}</h1>
+      <h1>{{company.addresCompany}}</h1>
     </td>
   </tr>
   </tbody>
 </table>
+
+
+
+
 
 
 

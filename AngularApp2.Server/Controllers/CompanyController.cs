@@ -28,19 +28,19 @@ namespace AngularApp2.Server.Controllers
         }
         [HttpPost]
         [Route("api/company/add")]
-        public bool AddCompany(Company company)
+        public bool AddCompany([FromBody]Company company)
         {
             return _company.Add(company);
         }
         [HttpPut]
         [Route("api/company/update")]
-        public bool UpdateCompany(Company company) 
+        public bool UpdateCompany([FromBody]Company company) 
         {
             return _company.Update(company);
         }
         [HttpDelete]
-        [Route("api/company/delete")]
-        public bool DeleteCompany(int id)
+        [Route("api/company/delete/{id}")]
+        public bool DeleteCompany([FromRoute] int id)
         {
             return _company.Delete(id);
         }

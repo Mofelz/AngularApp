@@ -15,6 +15,16 @@ namespace AngularApp2.Server.Repository
             _context = context;
         }
 
+        public Company GetById(int id)
+        {
+            return _context.Companies.Find(id);
+        }
+
+        public IEnumerable<Company> GetAll()
+        {
+            return _context.Companies;
+        }
+
         public bool Add(Company company)
         {
             try
@@ -27,11 +37,6 @@ namespace AngularApp2.Server.Repository
             {
                 return false;
             }
-        }
-
-        public Company GetById(int id)
-        {
-            return _context.Companies.Find(id);
         }
 
         public bool Update(Company company) 
@@ -66,7 +71,7 @@ namespace AngularApp2.Server.Repository
                 Company currentCompany = GetById(id);
                 if (currentCompany != null)
                 {
-                    _context.Remove(currentCompany);
+                    _context.Companies.Remove(currentCompany);
                     _context.SaveChanges();
                     return true;
                 }
@@ -79,11 +84,6 @@ namespace AngularApp2.Server.Repository
             {
                 return false;
             }
-        }
-
-        public IEnumerable<Company> GetAll()
-        {
-            return _context.Companies;
         }
     }
 }
