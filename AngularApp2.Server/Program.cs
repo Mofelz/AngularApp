@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DazaBannixContext>(options => options.UseMySql(builder.Configuration["ConnectionStrings:DefaultConnection"],new MySqlServerVersion(new Version(8,0,22))));
 builder.Services.AddScoped<IFio,FioRepository>();
 builder.Services.AddScoped<ICompany,CompanyRepository>();
+builder.Services.AddScoped<IUser,UserRepository>();
 
 var app = builder.Build();
 app.UseCors(option => 

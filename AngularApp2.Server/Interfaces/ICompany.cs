@@ -9,5 +9,6 @@ namespace AngularApp2.Server.Interfaces
         bool Update(Company company);
         bool Delete(int id);
         Company GetById(int id);
+        
     }
 }

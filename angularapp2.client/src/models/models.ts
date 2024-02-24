@@ -10,3 +10,10 @@ export interface Company{
   nameCompany: string;
   addresCompany: string;
 }
+export interface User{
+  id?: number;
+  active?: boolean;
+  name: string;
+  password: string;
+  role: string;
+}

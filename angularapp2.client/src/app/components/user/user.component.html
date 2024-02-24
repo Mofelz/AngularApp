@@ -1,0 +1,49 @@
+<div *ngIf="!authUser">
+  <div>
+    <label>Логин</label>
+    <input [(ngModel)]="user.name" type="text" maxlength="50">
+  </div>
+  <div>
+    <label>Пароль</label>
+    <input [(ngModel)]="user.password" type="password" maxlength="50">
+  </div>
+
+  <button (click)="LoginUser()">Войти</button>
+
+
+</div>
+
+<div *ngIf="authUser">
+  <table>
+    <thead>
+      <tr>
+        <th>
+          <h2>Номер</h2>
+        </th>
+        <th>
+          <h2 >Логин</h2>
+        </th>
+        <th>
+          <h2>Роль</h2>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let xui of activeUsers">
+        <td>
+          <h2>{{xui.id}}</h2>
+        </td>
+        <td>
+          <h2>{{xui.name}}</h2>
+        </td>
+        <td>
+          <h2>{{xui.role}}</h2>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <button >Выход</button>
+  </div>
+</div>
