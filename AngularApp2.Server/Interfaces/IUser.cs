@@ -1,10 +1,11 @@
-﻿using AngularApp2.Server.Modelz;
+﻿using AngularApp2.Server.Models;
+using AngularApp2.Server.Repository;
 
 namespace AngularApp2.Server.Interfaces
 {
     public interface IUser
     {
         string Login(User user);
-        IEnumerable<User> GetAllActiveUsers();
+        string Registration(User user);
     }
 }

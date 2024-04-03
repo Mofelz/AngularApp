@@ -1,18 +1,18 @@
 ﻿using AngularApp2.Server.Context;
 using AngularApp2.Server.Interfaces;
-using AngularApp2.Server.Modelz;
+using AngularApp2.Server.Models;
 
 namespace AngularApp2.Server.Repository
 {
     public class FioRepository : IFio
     {
-        private DazaBannixContext _context;
+        private ContextDB _context;
 
-        public FioRepository(DazaBannixContext context) 
-        { 
+        public FioRepository(ContextDB context)
+        {
             _context = context;
         }
-        public IEnumerable<Fio> GetAll() 
+        public IEnumerable<Fio> GetAll()
         {
             return _context.Fios;
         }

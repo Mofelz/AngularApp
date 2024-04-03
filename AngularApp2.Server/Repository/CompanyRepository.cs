@@ -1,16 +1,16 @@
 ﻿using AngularApp2.Server.Context;
 using AngularApp2.Server.Interfaces;
-using AngularApp2.Server.Modelz;
+using AngularApp2.Server.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace AngularApp2.Server.Repository
 {
     public class CompanyRepository : ICompany
     {
-        private DazaBannixContext _context;
+        private ContextDB _context;
 
 
-        public CompanyRepository(DazaBannixContext context)
+        public CompanyRepository(ContextDB context)
         {
             _context = context;
         }
@@ -25,21 +25,21 @@ namespace AngularApp2.Server.Repository
             return _context.Companies;
         }
 
-        public bool Add(Company company)
+        public Company Add(Company company)
         {
             try
             {
                 _context.Companies.Add(company);
                 _context.SaveChanges();
-                return true;
+                return company;
             }
-            catch 
+            catch
             {
-                return false;
+                return null;
             }
         }
 
-        public bool Update(Company company) 
+        public string Update(Company company)
         {
             try
             {
@@ -51,22 +51,22 @@ namespace AngularApp2.Server.Repository
 
                     _context.Companies.Update(currentCompany);
                     _context.SaveChanges();
-                    return true;
+                    return "Success";
                 }
                 else
                 {
-                    return false;
+                    return "Enter anything!";
                 }
             }
-            catch
-            { 
-                return false;
+            catch (Exception ex)
+            {
+                return ex.Message;
             }
         }
 
         public bool Delete(int id)
         {
-            try 
+            try
             {
                 Company currentCompany = GetById(id);
                 if (currentCompany != null)

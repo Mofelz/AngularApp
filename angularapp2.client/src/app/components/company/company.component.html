@@ -3,20 +3,14 @@
 
 <div>
   <div>
-    <label>Номер</label>
-    <input [(ngModel)]="company.id" type="number" maxlength="50">
-  </div>
-  <div>
     <label>Наименование</label>
-    <input [(ngModel)]="company.nameCompany" type="text" maxlength="50">
+    <input [(ngModel)]="company.nameCompany" >
   </div>
   <div>
     <label>Адрес</label>
-    <input [(ngModel)]="company.addresCompany" type="text" maxlength="50">
+    <input [(ngModel)]="company.addresCompany">
   </div>
   <button (click)="addCompany()">Добавить</button>
-  <button (click)="updateCompany()">Обновить</button>
-  <button (click)="deleteCompany()">Удалить</button>
   <button (click)="searchCompany()">Поиск по id</button>
 
 </div>
@@ -38,19 +32,23 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let  company of companies">
+  <tr *ngFor="let  company of companies" >
     <td>
       <h1>{{company.nameCompany}}</h1>
     </td>
     <td>
       <h1>{{company.addresCompany}}</h1>
     </td>
-<!--    <td>-->
-<!--      <button (click)="updateCompany(company)">GHbdth</button>-->
-<!--    </td>-->
+    <td>
+      <button (click)="updateCompany(company)">Обновить</button>
+    </td>
+    <td>
+      <button (click)="deleteCompany(company.id)">Удалить</button>
+    </td>
   </tr>
   </tbody>
 </table>
+
 
 
 

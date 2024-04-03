@@ -1,5 +1,5 @@
 ﻿using AngularApp2.Server.Interfaces;
-using AngularApp2.Server.Modelz;
+using AngularApp2.Server.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AngularApp2.Server.Controllers
@@ -19,11 +19,12 @@ namespace AngularApp2.Server.Controllers
         {
             return Json(_user.Login(user));
         }
-        [HttpGet]
-        [Route("api/user/getall")]
-        public IEnumerable<User> GetUsersActive()
+
+        [HttpPost]
+        [Route("api/registration")]
+        public IActionResult Registration([FromBody] User newUser)
         {
-            return _user.GetAllActiveUsers();
+            return Json(_user.Registration(newUser));
         }
-    }
+}
 }

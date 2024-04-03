@@ -1,6 +1,6 @@
 ﻿using AngularApp2.Server.Context;
 using AngularApp2.Server.Interfaces;
-using AngularApp2.Server.Modelz;
+using AngularApp2.Server.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AngularApp2.Server.Controllers
@@ -22,19 +22,19 @@ namespace AngularApp2.Server.Controllers
         }
         [HttpGet]
         [Route("api/company/getbyid/{id}")]
-        public Company GetByIdCompany([FromRoute]int id)
+        public Company GetByIdCompany([FromRoute] int id)
         {
             return _company.GetById(id);
         }
         [HttpPost]
         [Route("api/company/add")]
-        public bool AddCompany([FromBody]Company company)
+        public Company AddCompany([FromBody] Company company)
         {
             return _company.Add(company);
         }
         [HttpPut]
         [Route("api/company/update")]
-        public bool UpdateCompany([FromBody]Company company) 
+        public string UpdateCompany([FromBody] Company company)
         {
             return _company.Update(company);
         }

@@ -11,10 +11,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<DazaBannixContext>(options => options.UseMySql(builder.Configuration["ConnectionStrings:DefaultConnection"],new MySqlServerVersion(new Version(8,0,22))));
-builder.Services.AddScoped<IFio,FioRepository>();
-builder.Services.AddScoped<ICompany,CompanyRepository>();
-builder.Services.AddScoped<IUser,UserRepository>();
+builder.Services.AddDbContext<ContextDB>(options => options.UseMySql(builder.Configuration["ConnectionStrings:DefaultConnection"], new MySqlServerVersion(new Version(8, 0, 22))));
+builder.Services.AddScoped<IFio, FioRepository>();
+builder.Services.AddScoped<ICompany, CompanyRepository>();
+builder.Services.AddScoped<IUser, UserRepository>();
 
 var app = builder.Build();
 app.UseCors(option => 

@@ -1,49 +1,81 @@
-<div *ngIf="!authUser">
-  <div>
-    <label>Логин</label>
-    <input [(ngModel)]="user.name" type="text" maxlength="50">
-  </div>
-  <div>
-    <label>Пароль</label>
-    <input [(ngModel)]="user.password" type="password" maxlength="50">
-  </div>
+<!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>-->
+<html>
 
-  <button (click)="LoginUser()">Войти</button>
+</html>
+<body>
+<div class="form">
+  <div class="title">Регистрация</div>
+  <form [formGroup]="regForm" style="padding: 15px" action="#">
+    <div class="form-row">
+      <div class="input-container ic1 ">
+        <input formControlName="login" type="text" class="input" id="firstname" placeholder=" ">
+        <div class="cut"></div>
+        <label class="placeholder" for="firstname">Логин
+          <span *ngIf="regForm.get('login').errors && regForm.get('login').hasError('required')" style="color: red">*</span>
+        </label>
+      </div>
+      <div class="input-container ic1">
+        <input formControlName="password" type="password" class="input" id="password" placeholder=" ">
+        <div class="cut"></div>
+        <label class="placeholder" for="password">Пароль
+          <span *ngIf="regForm.get('password').errors && regForm.get('password').hasError('required')" style="color: red">*</span>
+        </label>
+      </div>
+    </div>
 
+    <div class="input-container ic1">
+      <input formControlName="passwordReturn" type="password" class="input" id="passwordReturn" placeholder=" ">
+      <div class="cut long"></div>
+      <label for="passwordReturn" class="placeholder">Подтвердите пароль
+        <span *ngIf="regForm.get('passwordReturn').errors && regForm.get('passwordReturn').hasError('required')" style="color: red">*</span>
+      </label>
+    </div>
 
+    <div class="input-container ic1">
+      <input formControlName="name" class="input" id="name" placeholder=" ">
+      <div class="cut"></div>
+      <label for="name" class="placeholder">Имя
+        <span *ngIf="regForm.get('name').errors && regForm.get('name').hasError('required')" style="color: red">*</span>
+      </label>
+    </div>
+
+    <div class="input-container ic1">
+      <input formControlName="surname" class="input" id="surname" placeholder=" ">
+      <div class="cut"></div>
+      <label for="surname" class="placeholder">Фамилия <span *ngIf="regForm.get('surname').errors && regForm.get('surname').hasError('required')" style="color: red">*</span>
+      </label>
+    </div>
+
+    <div class="input-container ic1">
+      <input formControlName="patronomic" class="input" id="patronomic" placeholder=" ">
+      <div class="cut"></div>
+      <label for="patronomic" class="placeholder">Отчество <span *ngIf="regForm.get('patronomic').errors && regForm.get('patronomic').hasError('required')" style="color: red">*</span>
+      </label>
+    </div>
+
+    <div class="input-container ic1">
+      <input formControlName="birthday" type="date" class="input" id="birthday" placeholder=" ">
+      <div class="cut long"></div>
+      <label for="birthday" class="placeholder">Дата рождения <span *ngIf="regForm.get('birthday').errors && regForm.get('birthday').hasError('required')"  style="color: red">*</span>
+      </label>
+    </div>
+
+    <div class="input-container ic1">
+      <input formControlName="mail" class="input" id="mail" placeholder=" " type="email">
+      <div class="cut"></div>
+      <label for="mail" class="placeholder">Почта <span *ngIf="regForm.get('mail').errors && regForm.get('mail').hasError('email') || regForm.get('mail').hasError('required')" style="color: red">*</span>
+      </label>
+    </div>
+
+    <div class="input-container ic1">
+      <input formControlName="phoneNumber" prefix="+7" type="text" maxlength="11" minlength="10" class="input" id="phoneNumber" placeholder=" ">
+      <div class="cut long"></div>
+      <label for="phoneNumber" class="placeholder">Номер телефона <span *ngIf="regForm.get('phoneNumber').errors && regForm.get('phoneNumber').hasError('required')" style="color: red">*</span>
+      </label>
+    </div>
+
+    <button class="submit" (click)="Registration()" type="button">Зарегистрироваться</button>
+  </form>
 </div>
-
-<div *ngIf="authUser">
-  <table>
-    <thead>
-      <tr>
-        <th>
-          <h2>Номер</h2>
-        </th>
-        <th>
-          <h2 >Логин</h2>
-        </th>
-        <th>
-          <h2>Роль</h2>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let xui of activeUsers">
-        <td>
-          <h2>{{xui.id}}</h2>
-        </td>
-        <td>
-          <h2>{{xui.name}}</h2>
-        </td>
-        <td>
-          <h2>{{xui.role}}</h2>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div>
-    <button >Выход</button>
-  </div>
-</div>
+</body>

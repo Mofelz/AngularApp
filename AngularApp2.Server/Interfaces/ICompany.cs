@@ -1,14 +1,13 @@
-﻿using AngularApp2.Server.Modelz;
+﻿using AngularApp2.Server.Models;
 
 namespace AngularApp2.Server.Interfaces
 {
     public interface ICompany
     {
         IEnumerable<Company> GetAll();
-        bool Add(Company company);
-        bool Update(Company company);
+        Company Add(Company company);
+        string Update(Company company);
         bool Delete(int id);
         Company GetById(int id);
-        
     }
 }

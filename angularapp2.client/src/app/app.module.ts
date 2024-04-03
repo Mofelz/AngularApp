@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FioComponent } from './components/fio/fio.component';
 import { CompanyComponent } from './components/company/company.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { UserComponent } from './components/user/user.component';
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { UserComponent } from './components/user/user.component';
   ],
     imports: [
         BrowserModule, HttpClientModule,
-        AppRoutingModule, FormsModule
+        AppRoutingModule, FormsModule, ReactiveFormsModule
     ],
   providers: [],
   bootstrap: [AppComponent]

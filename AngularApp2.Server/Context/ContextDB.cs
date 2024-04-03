@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using AngularApp2.Server.Modelz;
+using AngularApp2.Server.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace AngularApp2.Server.Context;
 
-public partial class DazaBannixContext : DbContext
+public partial class ContextDB : DbContext
 {
-    public DazaBannixContext()
+    public ContextDB()
     {
     }
 
-    public DazaBannixContext(DbContextOptions<DazaBannixContext> options)
+    public ContextDB(DbContextOptions<ContextDB> options)
         : base(options)
     {
     }
 
     public virtual DbSet<Company> Companies { get; set; }
+
+    public virtual DbSet<EfmigrationsHistory> EfmigrationsHistories { get; set; }
 
     public virtual DbSet<Fio> Fios { get; set; }
 
@@ -38,9 +40,21 @@ public partial class DazaBannixContext : DbContext
 
             entity.ToTable("Company");
 
+            entity.HasIndex(e => new { e.NameCompany, e.AddresCompany }, "NameCompany").IsUnique();
+
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.AddresCompany).HasMaxLength(50);
             entity.Property(e => e.NameCompany).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<EfmigrationsHistory>(entity =>
+        {
+            entity.HasKey(e => e.MigrationId).HasName("PRIMARY");
+
+            entity.ToTable("__EFMigrationsHistory");
+
+            entity.Property(e => e.MigrationId).HasMaxLength(150);
+            entity.Property(e => e.ProductVersion).HasMaxLength(32);
         });
 
         modelBuilder.Entity<Fio>(entity =>
@@ -63,9 +77,13 @@ public partial class DazaBannixContext : DbContext
             entity.ToTable("User");
 
             entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Login).HasMaxLength(50);
+            entity.Property(e => e.Mail).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(50);
             entity.Property(e => e.Password).HasMaxLength(50);
-            entity.Property(e => e.Role).HasMaxLength(50);
+            entity.Property(e => e.Patronomic).HasMaxLength(50);
+            entity.Property(e => e.PhoneNumber).HasMaxLength(11);
+            entity.Property(e => e.Surname).HasMaxLength(50);
         });
 
         OnModelCreatingPartial(modelBuilder);

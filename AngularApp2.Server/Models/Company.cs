@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AngularApp2.Server.Modelz;
+namespace AngularApp2.Server.Models;
 
 public partial class Company
 {

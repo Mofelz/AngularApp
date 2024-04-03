@@ -1,5 +1,5 @@
 ﻿using AngularApp2.Server.Interfaces;
-using AngularApp2.Server.Modelz;
+using AngularApp2.Server.Models;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -9,17 +9,11 @@ namespace AngularApp2.Server.Controllers
     {
         IFio _fio;
 
-        public FioController(IFio fio) 
+        public FioController(IFio fio)
         {
             _fio = fio;
         }
 
-        [HttpGet]
-        [Route("api/fio/getall")]
-        public IEnumerable<Fio> GetAll() 
-        {
-            return _fio.GetAll();
-        }
         [HttpGet]
         [Route("api/fio/getbyid/{id}")]
         public Fio GetByIdFio([FromRoute] int id)

@@ -16,4 +16,7 @@ export class UserService{
   GetAllUsersActive():Observable<User[]>{
     return this.http.get<any>('https://localhost:7014/api/user/getall')
   }
+  RegistrationUser(user: User):Observable<string>{
+    return this.http.post<any>('https://localhost:7014/api/registration', user)
+  }
 }

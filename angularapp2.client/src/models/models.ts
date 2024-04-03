@@ -12,8 +12,13 @@ export interface Company{
 }
 export interface User{
   id?: number;
-  active?: boolean;
-  name: string;
+  login: string;
   password: string;
-  role: string;
+  name: string;
+  surname: string;
+  patronomic?: string;
+  birthday: Date;
+  mail: string;
+  phoneNumber: string;
 }
+

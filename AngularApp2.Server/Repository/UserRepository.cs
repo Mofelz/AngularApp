@@ -1,16 +1,17 @@
 ﻿using AngularApp2.Server.Context;
 using AngularApp2.Server.Interfaces;
-using AngularApp2.Server.Modelz;
+using AngularApp2.Server.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace AngularApp2.Server.Repository
 {
     public class UserRepository : IUser
     {
-        private DazaBannixContext _context;
+        private ContextDB _context;
 
-        public UserRepository(DazaBannixContext context) 
+        public UserRepository(ContextDB context)
         {
             _context = context;
         }
@@ -22,7 +23,7 @@ namespace AngularApp2.Server.Repository
                 User currentUser = _context.Users.FirstOrDefault(u => u.Name == user.Name);
                 if (currentUser != null)
                 {
-                    if(currentUser.Password == user.Password)
+                    if (currentUser.Password == user.Password)
                     {
                         return "Success";
                     }
@@ -36,15 +37,44 @@ namespace AngularApp2.Server.Repository
                     return "User not found";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return ex.Message;
             }
         }
 
-        public IEnumerable<User> GetAllActiveUsers()
+        public string Registration(User user)
         {
-            return _context.Users.Where(u => u.Active == true);
+            try
+            {
+                if (!_context.Users.IsNullOrEmpty())
+                {
+                    if (_context.Users.Any(u => u.Login == user.Login))
+                    {
+                        return "LoginExist";
+                    }
+                }
+                user.Id = GetMaxId();
+                _context.Users.Add(user);
+                _context.SaveChanges();
+                return "Successfully";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        private int GetMaxId()
+        {
+            if (_context.Users.IsNullOrEmpty())
+            {
+                return 1;
+            }
+            else
+            {
+                return _context.Users.Max(u => u.Id) + 1;
+            }
         }
     }
 }

@@ -12,44 +12,74 @@ export class CompanyComponent implements OnInit{
   companies: Company[];
   company: Company = {nameCompany: '',addresCompany: ''}
 
+
   constructor(private service:CompanyService,) {}
   ngOnInit() {
     this.getCompany()
   }
   getCompany(){
     this.service.getAllCompany().subscribe(
-      company => this.companies = company
+      company => {
+        this.companies = []
+        this.companies.push(...company)
+      }
     )
   }
   addCompany(){
+    if(this.company.nameCompany == '' ||
+      this.company.addresCompany == ''){
+
+      alert("Не все поля заполнены")
+      return
+    }
     this.service.addCompany(this.company).subscribe(
       res => {
         if (res){
-          this.company = null
-          alert("Успешно добавлен!")
+
+          this.company.nameCompany = ''
+          this.company.addresCompany = ''
+
+          alert("Пользолватель зарегистрирован!")
         }else {
           alert("Абшибка!")
         }
       }
     )
   }
-  updateCompany(){
-    this.service.updateCompany(this.company).subscribe(
+
+  updateCompany(company: Company) {
+    if(this.company.nameCompany == '' ||
+      this.company.addresCompany == ''){
+
+      alert("Не все поля заполнены!")
+      return
+    }else if(company.nameCompany == this.company.nameCompany ||
+      company.addresCompany == this.company.addresCompany){
+      alert("Такие данные уже существуют!")
+    }
+    company.nameCompany = this.company.nameCompany
+    company.addresCompany = this.company.addresCompany
+
+    this.service.updateCompany(company).subscribe(
       res => {
-        if (res){
-          this.company = null
+        if (res == "Success"){
           alert("Данные успешно обновлены!")
+          this.company.nameCompany = ''
+          this.company.addresCompany = ''
+
+        }else if(res == "Enter anything!"){
+          alert("Введите данные!")
         }else {
-          alert("Абшибка!")
+          alert(res)
         }
       }
     )
   }
-  deleteCompany(){
-    this.service.deleteCompany(this.company.id).subscribe(
+  deleteCompany(company_id: number){
+    this.service.deleteCompany(company_id).subscribe(
       res => {
         if (res){
-          this.company.id = null
+          this.getCompany()
           alert("Данные успешно удалены!")
         }else {
           alert("Абшибка!")
@@ -58,6 +88,12 @@ export class CompanyComponent implements OnInit{
     )
   }
   searchCompany(){
+    if(this.company.nameCompany == '' ||
+      this.company.addresCompany == ''){
+
+      alert("Не все поля заполнены")
+      return
+    }
     this.service.searchByIdCompany(this.company.id).subscribe(
       res => {
         this.company.nameCompany = res.nameCompany
