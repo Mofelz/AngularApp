@@ -2,7 +2,9 @@
 using AngularApp2.Server.Interfaces;
 using AngularApp2.Server.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Tokens;
+using MySqlConnector.Logging;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace AngularApp2.Server.Repository
@@ -11,7 +13,7 @@ namespace AngularApp2.Server.Repository
     {
         private ContextDB _context;
 
-        public UserRepository(ContextDB context)
+        public UserRepository(ContextDB context, IMemoryCache memoryCache)
         {
             _context = context;
         }
@@ -47,17 +49,18 @@ namespace AngularApp2.Server.Repository
         {
             try
             {
-                if (!_context.Users.IsNullOrEmpty())
-                {
-                    if (_context.Users.Any(u => u.Login == user.Login))
+                    if (!_context.Users.IsNullOrEmpty())
                     {
-                        return "LoginExist";
+                        if (_context.Users.Any(u => u.Login == user.Login))
+                        {
+                            return "LoginExist";
+                        }
                     }
-                }
-                user.Id = GetMaxId();
-                _context.Users.Add(user);
-                _context.SaveChanges();
-                return "Successfully";
+                    user.Id = GetMaxId();
+                    _context.Users.Add(user);
+                    _context.SaveChanges();
+                    return "Successfully";
+
             }
             catch (Exception ex)
             {
