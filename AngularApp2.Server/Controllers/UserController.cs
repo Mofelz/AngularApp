@@ -1,6 +1,7 @@
 ﻿using AngularApp2.Server.Interfaces;
 using AngularApp2.Server.Models;
 using Microsoft.AspNetCore.Mvc;
+//static Microsoft.Extensions.Caching.Memory.IMemoryCache;
 
 namespace AngularApp2.Server.Controllers
 {

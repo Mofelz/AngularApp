@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {User} from "../../../models/models";
 import {UserService} from "../../../services/user.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvider";
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-user',
@@ -62,8 +64,9 @@ export class UserComponent implements OnInit{
       return;
     }
 
+
     if(!this.regForm.valid){
-      alert("Не все данные валидны!")
+      alert("Не все данные корректны!")
       return
     }
 
