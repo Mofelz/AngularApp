@@ -1,24 +1,15 @@
-export interface Fio{
-  id: number;
-  surname: string;
-  name: string;
-  patronomic?: string;
-  number: number;
-}
-export interface Company{
-  id?: number;
-  nameCompany: string;
-  addresCompany: string;
-}
-export interface User{
-  id?: number;
+export interface UserRegistrationDto{
   login: string;
   password: string;
   name: string;
   surname: string;
-  patronomic?: string;
+  patronymic?: string;
   birthday: Date;
   mail: string;
   phoneNumber: string;
+  agreementAccept: boolean;
 }
-
+export interface UserLoginDto{
+  mail: string;
+  password: string;
+}

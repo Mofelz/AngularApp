@@ -18,48 +18,22 @@ namespace AngularApp2.Server.Repository
             _context = context;
         }
 
-        public string Login(User user)
-        {
-            try
-            {
-                User currentUser = _context.Users.FirstOrDefault(u => u.Name == user.Name);
-                if (currentUser != null)
-                {
-                    if (currentUser.Password == user.Password)
-                    {
-                        return "Success";
-                    }
-                    else
-                    {
-                        return "Password error";
-                    }
-                }
-                else
-                {
-                    return "User not found";
-                }
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
-        }
-
         public string Registration(User user)
         {
             try
             {
-                    if (!_context.Users.IsNullOrEmpty())
+                if (!_context.Users.IsNullOrEmpty())
+                {
+                    if (_context.Users.Any(u => u.Login == user.Login))
                     {
-                        if (_context.Users.Any(u => u.Login == user.Login))
-                        {
-                            return "LoginExist";
-                        }
+                        Console.WriteLine(user);
+                        return "LoginExist";
                     }
-                    user.Id = GetMaxId();
-                    _context.Users.Add(user);
-                    _context.SaveChanges();
-                    return "Successfully";
+                }
+                user.Id = GetMaxId();
+                _context.Users.Add(user);
+                _context.SaveChanges();
+                return "Successfully";
 
             }
             catch (Exception ex)

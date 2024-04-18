@@ -17,7 +17,7 @@ public partial class User
 
     public string? Patronomic { get; set; }
 
-    public DateTime Birthday { get; set; }
+    public DateOnly Birthday { get; set; }
 
     public string Mail { get; set; } = null!;
 

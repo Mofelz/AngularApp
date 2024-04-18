@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "../../../models/models";
+import {UserRegistrationDto} from "../../../models/models";
 import {UserService} from "../../../services/user.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvider";
 import {formatDate} from "@angular/common";
 
@@ -12,50 +12,29 @@ import {formatDate} from "@angular/common";
 })
 export class UserComponent implements OnInit{
 
-  // user: User = {name: '',password: '',role: ''}
-  authUser: boolean = false;
-
-  user: User;
+  user: UserRegistrationDto;
 
   regForm: FormGroup;
 
-  activeUsers: User[];
+  date: Date;
+
   constructor(private service:UserService,) {}
   ngOnInit(): void {
-    this.GetAllUsersActive()
-
-    let date = new Date(Date.now())
-    date.setDate(date.getDate()-6570)
+    this.date = new Date(Date.now())
+    this.date.setDate(this.date.getDate()-6570)
     this.regForm = new FormGroup({
-      login: new FormControl<string>("",Validators.required),
+      userName: new FormControl<string>("",[Validators.required,Validators.minLength(5)]),
       password: new FormControl<string>("",Validators.required),
       passwordReturn: new FormControl<string>("",Validators.required),
       name: new FormControl<string>("",Validators.required),
-      surname: new FormControl<string>("",Validators.required),
-      patronomic: new FormControl<string>(""),
-      birthday: new FormControl<Date>(date,Validators.required),
-      mail: new FormControl<string>("",[Validators.required, Validators.email]),
-      phoneNumber: new FormControl<string>("",Validators.required)
+      lastName: new FormControl<string>("",Validators.required),
+      patronymic: new FormControl<string>(""),
+      birthdayDate: new FormControl<Date>(null,Validators.required),
+      email: new FormControl<string>("",[Validators.required, Validators.email]),
+      phoneNumber: new FormControl<string>("",[Validators.required, Validators.minLength(10)]),
+      agreementAccept: new FormControl<boolean>(false,Validators.required)
     })
   }
-  // LoginUser(){
-  //   this.service.Login(this.user).subscribe(
-  //     res => {
-  //       if (res == "Success"){
-  //         this.user.name = ''
-  //         this.user.password = ''
-  //         alert("Пользователь успешно вошел!")
-  //         this.authUser = true
-  //       }else if(res == "Password error"){
-  //         alert("Неверный пароль")
-  //       }else if(res == "User not found"){
-  //         alert("Такой пользователь не найден")
-  //       }else {
-  //         alert(res)
-  //       }
-  //     }
-  //   )
-  // }
 
   Registration(){
 
@@ -64,42 +43,47 @@ export class UserComponent implements OnInit{
       return;
     }
 
+    if(this.regForm.get('login').value.length < 5){
+      alert("У логина не может быть меньше 5 символов!")
+      return;
+    }
+
+    if(this.regForm.get('password').value.length < 5){
+      alert("У пароля не может быть меньше 5 символов!")
+      return;
+    }
+
+    if(new Date(this.regForm.get('birthday').value).getTime() > this.date.getTime()){
+      alert("Вам не должно быть меньше 18-ти лет")
+      return;
+    }
 
     if(!this.regForm.valid){
-      alert("Не все данные корректны!")
+      alert("Не все поля заполнены или корректны!")
       return
     }
 
     delete this.regForm.value['passwordReturn']
     this.user = this.regForm.value
-    this.user.id = 1;
+    // this.user.id = 1;
     this.user.phoneNumber = this.user.phoneNumber.toString()
-    this.user.birthday = new Date(this.regForm.get('birthday').value)
+    this.user.birthday = this.regForm.get('birthday').value
 
-    this.service.RegistrationUser(this.user).subscribe(
-      result => {
-        if(result == "Successfully"){
-          this.regForm.reset()
-          alert("Пользователь успешно зарегистрирован!")
-        }
-        else if(result == "LoginExist"){
-          alert("Пользователь с таким логином уже существует!")
-        }
-        else{
-          alert("One more error")
-        }
-      }
-    )
-  }
 
-  GetAllUsersActive(){
-    this.service.GetAllUsersActive().subscribe(
-      res => {
-        this.activeUsers = res
-      }
-    )
-  }
-  ExitUser() {
-    this.authUser = false
+    console.log(this.user)
+    // this.service.RegistrationUser(this.user).subscribe(
+    //   result => {
+    //     if(result == "Successfully"){
+    //       this.regForm.reset()
+    //       alert("Пользователь успешно зарегистрирован!")
+    //     }
+    //     else if(result == "LoginExist"){
+    //       alert("Пользователь с таким логином уже существует!")
+    //     }
+    //     else{
+    //       alert("One more error")
+    //     }
+    //   }
+    // )
   }
 }

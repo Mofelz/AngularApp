@@ -1,10 +1,11 @@
 * {
   padding: 0;
   margin: 0;
+
 }
 body {
   align-items: center;
-  background-color: #000;
+  background-color: black;
   display: flex;
   justify-content: center;
   height: 100vh;
@@ -14,9 +15,11 @@ body {
   background-color: #15172b;
   border-radius: 20px;
   box-sizing: border-box;
-  height: 900px;
+  height: auto;
   padding: 10px;
-  width: 320px;
+  /*width: 320px;*/
+  width: 40%;
+
 }
 
 .title {
@@ -38,7 +41,8 @@ body {
 .input-container {
   height: 50px;
   position: relative;
-  width: 100%;
+  width: 50%;
+
 }
 
 .ic1 {
@@ -59,8 +63,9 @@ body {
   height: 100%;
   outline: 0;
   padding: 4px 20px 0;
-  width: 100%;
-  /*width: 270px;*/
+  width: 90%;
+
+
 }
 
 .cut {
@@ -89,7 +94,7 @@ body {
 .placeholder {
   color: #65657b;
   font-family: sans-serif;
-  left: 20px;
+  left: 30px;
   line-height: 14px;
   pointer-events: none;
   position: absolute;
@@ -122,7 +127,7 @@ body {
   font-size: 18px;
   height: 50px;
   margin-top: 20px;
-// outline: 0;
+  outline: 0;
   text-align: center;
   width: 100%;
 }
@@ -131,4 +136,8 @@ body {
   background-color: black;
 }
 
+.submit:hover{
+  background-color:rgb(18, 15, 15);
+  transition: 0.7s;
+}
 
