@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvider";
 import {formatDate} from "@angular/common";
 
+
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -12,18 +13,12 @@ import {formatDate} from "@angular/common";
 })
 export class UserComponent implements OnInit{
 
-  // user: User = {name: '',password: '',role: ''}
-  authUser: boolean = false;
-
   user: User;
 
   regForm: FormGroup;
 
-  activeUsers: User[];
   constructor(private service:UserService,) {}
   ngOnInit(): void {
-    this.GetAllUsersActive()
-
     let date = new Date(Date.now())
     date.setDate(date.getDate()-6570)
     this.regForm = new FormGroup({
@@ -38,24 +33,6 @@ export class UserComponent implements OnInit{
       phoneNumber: new FormControl<string>("",Validators.required)
     })
   }
-  // LoginUser(){
-  //   this.service.Login(this.user).subscribe(
-  //     res => {
-  //       if (res == "Success"){
-  //         this.user.name = ''
-  //         this.user.password = ''
-  //         alert("Пользователь успешно вошел!")
-  //         this.authUser = true
-  //       }else if(res == "Password error"){
-  //         alert("Неверный пароль")
-  //       }else if(res == "User not found"){
-  //         alert("Такой пользователь не найден")
-  //       }else {
-  //         alert(res)
-  //       }
-  //     }
-  //   )
-  // }
 
   Registration(){
 
@@ -64,9 +41,18 @@ export class UserComponent implements OnInit{
       return;
     }
 
+    if(this.regForm.get('login').value.length < 5){
+      alert("Логин не может быть меньше 5 символов!")
+      return;
+    }
+
+    if(this.regForm.get('password').value.length < 5){
+      alert("Пароль не может быть меньше 5 символов!")
+      return;
+    }
 
     if(!this.regForm.valid){
-      alert("Не все данные корректны!")
+      alert("Не все данные заполнены либо корректны!")
       return
     }
 
@@ -90,16 +76,5 @@ export class UserComponent implements OnInit{
         }
       }
     )
-  }
-
-  GetAllUsersActive(){
-    this.service.GetAllUsersActive().subscribe(
-      res => {
-        this.activeUsers = res
-      }
-    )
-  }
-  ExitUser() {
-    this.authUser = false
   }
 }

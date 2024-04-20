@@ -4,22 +4,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FioComponent } from './components/fio/fio.component';
-import { CompanyComponent } from './components/company/company.component';
+
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { UserComponent } from './components/user/user.component';
+import {NgxMaskDirective, NgxMaskPipe, provideNgxMask} from "ngx-mask";
 @NgModule({
   declarations: [
     AppComponent,
-    FioComponent,
-    CompanyComponent,
     UserComponent,
   ],
-    imports: [
-        BrowserModule, HttpClientModule,
-        AppRoutingModule, FormsModule, ReactiveFormsModule
-    ],
-  providers: [],
+  imports: [
+    BrowserModule, HttpClientModule,
+    AppRoutingModule, FormsModule, ReactiveFormsModule, NgxMaskDirective,NgxMaskPipe
+  ],
+  providers: [provideNgxMask()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

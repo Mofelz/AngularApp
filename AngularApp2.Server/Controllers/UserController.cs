@@ -15,13 +15,6 @@ namespace AngularApp2.Server.Controllers
         }
 
         [HttpPost]
-        [Route("api/login")]
-        public IActionResult LoginUser([FromBody] User user)
-        {
-            return Json(_user.Login(user));
-        }
-
-        [HttpPost]
         [Route("api/registration")]
         public IActionResult Registration([FromBody] User newUser)
         {

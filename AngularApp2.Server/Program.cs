@@ -18,8 +18,6 @@ builder.Services.AddDbContext<ContextDB>(options => options.UseInMemoryDatabase(
 // добавление кэширования
 builder.Services.AddMemoryCache();
 
-builder.Services.AddScoped<IFio, FioRepository>();
-builder.Services.AddScoped<ICompany, CompanyRepository>();
 builder.Services.AddScoped<IUser, UserRepository>();
 
 var app = builder.Build();

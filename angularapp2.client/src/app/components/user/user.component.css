@@ -1,7 +1,4 @@
-* {
-  padding: 0;
-  margin: 0;
-}
+
 body {
   align-items: center;
   background-color: #000;
@@ -16,15 +13,6 @@ body {
   box-sizing: border-box;
   height: 900px;
   padding: 10px;
-  width: 320px;
-}
-
-.title {
-  color: #eee;
-  font-family: sans-serif;
-  font-size: 36px;
-  font-weight: 600;
-
 }
 
 .subtitle {
@@ -46,7 +34,7 @@ body {
 }
 
 .ic2 {
-  margin-top: 30px;
+
 }
 
 .input {
@@ -59,8 +47,8 @@ body {
   height: 100%;
   outline: 0;
   padding: 4px 20px 0;
-  width: 100%;
-  /*width: 270px;*/
+  /*width: 100%;*/
+  width: 220px;
 }
 
 .cut {
@@ -89,7 +77,7 @@ body {
 .placeholder {
   color: #65657b;
   font-family: sans-serif;
-  left: 20px;
+  left: 30px;
   line-height: 14px;
   pointer-events: none;
   position: absolute;
@@ -108,27 +96,7 @@ body {
 }
 
 .input:focus ~ .placeholder {
-  /*color: #dc2f55;*/
   color: #dddddd;
-}
-
-.submit {
-  background-color: black;
-  border-radius: 12px;
-  border: 0;
-  box-sizing: border-box;
-  color: #eee;
-  cursor: pointer;
-  font-size: 18px;
-  height: 50px;
-  margin-top: 20px;
-// outline: 0;
-  text-align: center;
-  width: 100%;
-}
-
-.submit:active {
-  background-color: black;
 }
 
 

@@ -18,33 +18,6 @@ namespace AngularApp2.Server.Repository
             _context = context;
         }
 
-        public string Login(User user)
-        {
-            try
-            {
-                User currentUser = _context.Users.FirstOrDefault(u => u.Name == user.Name);
-                if (currentUser != null)
-                {
-                    if (currentUser.Password == user.Password)
-                    {
-                        return "Success";
-                    }
-                    else
-                    {
-                        return "Password error";
-                    }
-                }
-                else
-                {
-                    return "User not found";
-                }
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
-        }
-
         public string Registration(User user)
         {
             try
